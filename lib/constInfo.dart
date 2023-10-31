@@ -1,5 +1,6 @@
 // ignore_for_file: file_names
 import "package:flutter/material.dart";
+import "package:google_fonts/google_fonts.dart";
 
 class DesignColors {
   static const backgroundColor = Color.fromRGBO(0, 0, 0, 1.0);
@@ -7,6 +8,7 @@ class DesignColors {
   static const primaryColor = Colors.white;
   static const secondryColor = Colors.grey;
   static const darkGreyColor = Color.fromRGBO(97, 97, 97, 1);
+  static final TextStyle fontStyle = GoogleFonts.poppins();
 }
 
 Widget widthBox(double width) {
