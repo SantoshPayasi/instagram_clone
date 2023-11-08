@@ -55,7 +55,7 @@ class HomeScreen extends StatelessWidget {
             ),
             heightBox(10),
             Container(
-              height: MediaQuery.of(context).size.height * 0.4,
+              height: 300,
               width: MediaQuery.of(context).size.width,
               decoration:
                   const BoxDecoration(color: DesignColors.secondryColor),
@@ -68,19 +68,19 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     const Icon(
                       CupertinoIcons.heart_fill,
-                      size: 30,
+                      size: 25,
                     ),
-                    widthBox(5),
+                    widthBox(12),
                     const Icon(
                       CupertinoIcons.chat_bubble,
-                      size: 30,
+                      size: 25,
                     ),
-                    widthBox(10),
+                    widthBox(12),
                     Transform.rotate(
                       angle: -((180 * pi) / 720),
                       child: const Icon(
                         Icons.send_outlined,
-                        size: 30,
+                        size: 25,
                         color: DesignColors.primaryColor,
                       ),
                     )

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constInfo.dart';
 import 'package:instagram_clone/features/presentation/pages/Home/Home_screen.dart';
+import 'package:instagram_clone/features/presentation/pages/Profile/profile_screen.dart';
 import 'package:instagram_clone/features/presentation/pages/Search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -23,12 +24,7 @@ class _MainScreenState extends State<MainScreen> {
   void navigatedToNextPage(int value) {
     setState(() {
       index = value;
-    });
-  }
-
-  void movetoNextPage(double value) {
-    setState(() {
-      pageController.jumpTo(value);
+      pageController.jumpToPage(value);
     });
   }
 
@@ -41,6 +37,7 @@ class _MainScreenState extends State<MainScreen> {
           unselectedItemColor: DesignColors.primaryColor,
           selectedItemColor: DesignColors.primaryColor,
           backgroundColor: DesignColors.backgroundColor,
+          onTap: navigatedToNextPage,
           items: const [
             BottomNavigationBarItem(
                 icon: Icon(
@@ -78,9 +75,7 @@ class _MainScreenState extends State<MainScreen> {
           Center(
             child: Text("Liked Post page"),
           ),
-          Center(
-            child: Text("Profile page"),
-          ),
+         ProfileScreen()
         ],
       ),
     );
