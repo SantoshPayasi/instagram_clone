@@ -7,6 +7,7 @@ import "package:flutter_svg/flutter_svg.dart";
 import "dart:math";
 
 import 'package:instagram_clone/features/presentation/pages/Home/comment_screen.dart';
+import 'package:instagram_clone/features/presentation/pages/Home/editPostScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -55,7 +56,11 @@ class HomeScreen extends StatelessWidget {
                             Text("Username", style: DesignColors.fontStyle),
                           ],
                         ),
-                        const Icon(CupertinoIcons.ellipsis_vertical)
+                        InkWell(
+                            onTap: () {
+                              _showBottomSheet(context);
+                            },
+                            child: const Icon(CupertinoIcons.ellipsis_vertical))
                       ],
                     ),
                   ),
@@ -140,5 +145,48 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
             ])));
+  }
+
+  Future<dynamic> _showBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) => Container(
+              height: 120,
+              color: DesignColors.darkGreyColor,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    InkWell(
+                      child: Container(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            "Delete post",
+                            style: DesignColors.fontStyle.copyWith(
+                                fontWeight: FontWeight.bold, fontSize: 15),
+                          )),
+                    ),
+                    const Divider(
+                      color: DesignColors.secondryColor,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const EditPostScreen()));
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            "Edit post",
+                            style: DesignColors.fontStyle.copyWith(
+                              fontWeight: FontWeight.w200,
+                            ),
+                          )),
+                    ),
+                  ]),
+            ));
   }
 }
