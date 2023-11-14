@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constInfo.dart';
-import 'package:instagram_clone/features/presentation/pages/Profile/profile_edit_screen.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -162,11 +161,9 @@ class ProfileScreen extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Navigator.of(context).pop();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const EditProfileScreen()));
+                        Navigator.pushNamed(
+                            context, PageRoutes.editProfileScreen);
+                        // Navigator.pushNamed(context, "xyz");
                       },
                       child: Container(
                           padding: const EdgeInsets.only(left: 10),

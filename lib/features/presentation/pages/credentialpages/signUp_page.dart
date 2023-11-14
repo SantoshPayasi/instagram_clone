@@ -106,10 +106,8 @@ class _SignupPageState extends State<SignupPage> {
             BootomNavigationWidget(
               lable: "Already have any account?",
               navigationFunction: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SigninPage()),
-                    (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, PageRoutes.signInScreen, (route) => false);
               },
               navigationTitle: "SignIn Now",
             )

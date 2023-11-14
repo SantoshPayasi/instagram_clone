@@ -6,7 +6,6 @@ import 'package:instagram_clone/constInfo.dart';
 import "package:flutter_svg/flutter_svg.dart";
 import "dart:math";
 import 'package:instagram_clone/features/presentation/pages/Home/comment_screen.dart';
-import 'package:instagram_clone/features/presentation/pages/Home/editPostScreen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -171,10 +170,7 @@ class HomeScreen extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         Navigator.of(context).pop();
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const EditPostScreen()));
+                        Navigator.pushNamed(context, PageRoutes.editPostScreen);
                       },
                       child: Container(
                           padding: const EdgeInsets.only(left: 10),

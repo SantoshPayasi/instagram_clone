@@ -14,64 +14,81 @@ class EditPostScreen extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: DesignColors.backgroundColor,
+      appBar: AppBar(backgroundColor: DesignColors.backgroundColor, actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 10),
+          child: GestureDetector(
+              child: const Icon(
+            Icons.check,
+            color: DesignColors.blueColor,
+            size: 30,
+          )),
+        )
+      ]),
       body: SafeArea(
-        child: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              // Padding(
+              //   padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       GestureDetector(
+              //           onTap: () {
+              //             Navigator.pop(context);
+              //           },
+              //           child: const Icon(
+              //             Icons.clear_outlined,
+              //             size: 30,
+              //           )),
+
+              //     ],
+              //   ),
+              // ),
+              Container(
+                  padding: const EdgeInsets.symmetric(vertical: 30),
+                  child: Column(
+                    children: [
+                      const CircleAvatar(
+                        backgroundColor: DesignColors.primaryColor,
+                        radius: 45,
+                        child: Icon(
+                          Icons.person_2,
+                          color: DesignColors.secondryColor,
+                          size: 50,
+                        ),
+                      ),
+                      heightBox(20),
+                      Text(
+                        "Please Upload Image",
+                        style: DesignColors.fontStyle
+                            .copyWith(color: DesignColors.blueColor),
+                      ),
+                    ],
+                  )),
+              Stack(
                 children: [
-                  GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                      },
-                      child: const Icon(
-                        Icons.clear_outlined,
-                        size: 30,
-                      )),
-                  GestureDetector(
-                      child: const Icon(
-                    Icons.check,
-                    color: DesignColors.blueColor,
-                    size: 30,
-                  ))
+                  Container(
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    decoration:
+                        const BoxDecoration(color: DesignColors.secondryColor),
+                  ),
+                  const Positioned(
+                    top: 10,
+                    right: 10,
+                    child: CircleAvatar(
+                      backgroundColor: DesignColors.primaryColor,
+                      child: Icon(Icons.edit, color: DesignColors.blueColor),
+                    ),
+                  )
                 ],
               ),
-            ),
-            Container(
-                padding: const EdgeInsets.symmetric(vertical: 30),
-                child: Column(
-                  children: [
-                    const CircleAvatar(
-                      backgroundColor: DesignColors.primaryColor,
-                      radius: 45,
-                      child: Icon(
-                        Icons.person_2,
-                        color: DesignColors.secondryColor,
-                        size: 50,
-                      ),
-                    ),
-                    heightBox(20),
-                    Text(
-                      "Please Upload Image",
-                      style: DesignColors.fontStyle
-                          .copyWith(color: DesignColors.blueColor),
-                    ),
-                  ],
-                )),
-            Container(
-              height: 300,
-              width: MediaQuery.of(context).size.width,
-              decoration:
-                  const BoxDecoration(color: DesignColors.secondryColor),
-            ),
-            heightBox(20),
-            Expanded(
-              child: EditProfileForm(
-                  controller: description, lable: "Description"),
-            )
-          ],
+              heightBox(20),
+              EditProfileForm(controller: description, lable: "Description"),
+            ],
+          ),
         ),
       ),
     );

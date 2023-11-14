@@ -32,8 +32,10 @@ class _MainScreenState extends State<MainScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       bottomNavigationBar: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
           currentIndex: index,
           showSelectedLabels: false,
+          showUnselectedLabels: false,
           unselectedItemColor: DesignColors.primaryColor,
           selectedItemColor: DesignColors.primaryColor,
           backgroundColor: DesignColors.backgroundColor,
@@ -50,18 +52,21 @@ class _MainScreenState extends State<MainScreen> {
             BottomNavigationBarItem(
               icon: Icon(Icons.search),
               label: "Search",
-              backgroundColor: DesignColors.backgroundColor,
             ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.add_box_outlined),
-                activeIcon: Icon(Icons.add_box),
-                label: "Add-Post"),
+              icon: Icon(Icons.add_box_outlined),
+              activeIcon: Icon(Icons.add_box),
+              label: "Add-Post",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(CupertinoIcons.heart),
-                activeIcon: Icon(CupertinoIcons.heart_fill),
-                label: "Liked-Post"),
+              icon: Icon(CupertinoIcons.heart),
+              activeIcon: Icon(CupertinoIcons.heart_fill),
+              label: "Liked-Post",
+            ),
             BottomNavigationBarItem(
-                icon: Icon(Icons.account_circle), label: "Profile"),
+              icon: Icon(Icons.account_circle),
+              label: "Profile",
+            ),
           ]),
       body: PageView(
         controller: pageController,
@@ -75,7 +80,7 @@ class _MainScreenState extends State<MainScreen> {
           Center(
             child: Text("Liked Post page"),
           ),
-         ProfileScreen()
+          ProfileScreen()
         ],
       ),
     );
