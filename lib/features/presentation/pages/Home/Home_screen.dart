@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/constInfo.dart';
 import "package:flutter_svg/flutter_svg.dart";
 import "dart:math";
-
 import 'package:instagram_clone/features/presentation/pages/Home/comment_screen.dart';
 import 'package:instagram_clone/features/presentation/pages/Home/editPostScreen.dart';
 
