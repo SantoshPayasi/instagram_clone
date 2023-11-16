@@ -39,3 +39,13 @@ Widget widthBox(double width) {
 Widget heightBox(double height) {
   return SizedBox(height: height);
 }
+
+
+class PageRoutes{
+  static const editProfileScreen = "editProfileScreen";
+  static const editPostScreen = "editPostScreen";
+  static const profileScreen = "profileScreen";
+  static const commentScreen = "commentScreen";
+  static const signInScreen = "signInScreen";
+  static const signUpScreen = "signUpScreen";
+}

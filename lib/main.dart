@@ -6,6 +6,7 @@ import 'package:instagram_clone/features/presentation/pages/credentialpages/sign
 import 'package:firebase_core/firebase_core.dart';
 import 'package:instagram_clone/features/presentation/pages/main/main_screen.dart';
 import 'package:instagram_clone/firebase_options.dart';
+import "package:instagram_clone/route_controller.dart";
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,6 +22,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         theme: ThemeData.dark(),
         debugShowCheckedModeBanner: false,
-        home: const MainScreen());
+        onGenerateRoute: OnGenerateRoute.route,
+        initialRoute: "/",
+        routes:{
+          "/":(context)=>const MainScreen()
+        },
+        // home: const MainScreen()
+        // home: const SigninPage(),
+        );
   }
 }

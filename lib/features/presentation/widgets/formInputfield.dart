@@ -1,4 +1,3 @@
-
 // ignore_for_file: prefer_typing_uninitialized_variables, must_be_immutable, file_names
 
 import 'package:flutter/material.dart';
@@ -33,18 +32,18 @@ class _FormInputFieldsState extends State<FormInputFields> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      decoration: const BoxDecoration(
-          borderRadius: BorderRadius.all(Radius.circular(0)),
-          color: DesignColors.backgroundColor),
+    return SizedBox(
+      height: 45,
       child: TextFormField(
         textAlign: TextAlign.justify,
         controller: widget.fieldController,
         keyboardType: TextInputType.text,
         obscureText: widget.isPassword,
         style: const TextStyle(letterSpacing: 1, fontSize: 15),
+        // maxLines: 1,
         decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(12),
+            isDense: true,
             border: defaultBorder,
             hintText: widget.hintText,
             fillColor: DesignColors.darkGreyColor,

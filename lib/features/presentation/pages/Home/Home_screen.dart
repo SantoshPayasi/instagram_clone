@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:instagram_clone/constInfo.dart';
 import "package:flutter_svg/flutter_svg.dart";
 import "dart:math";
+import 'package:instagram_clone/features/presentation/pages/Home/comment_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -27,102 +28,160 @@ class HomeScreen extends StatelessWidget {
                   icon: const Icon(FontAwesomeIcons.facebookMessenger))
             ]),
         body: SafeArea(
-            child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            child: ListView(
+                scrollDirection: Axis.vertical,
+                physics: const BouncingScrollPhysics(),
                 children: [
-                  Row(
-                    children: [
-                      const CircleAvatar(
-                        backgroundColor: DesignColors.primaryColor,
-                        radius: 20,
-                        child: Icon(
-                          Icons.person_2_sharp,
-                          color: DesignColors.secondryColor,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(
+                          children: [
+                            const CircleAvatar(
+                              backgroundColor: DesignColors.primaryColor,
+                              radius: 20,
+                              child: Icon(
+                                Icons.person_2_sharp,
+                                color: DesignColors.secondryColor,
+                              ),
+                            ),
+                            widthBox(10),
+                            Text("Username", style: DesignColors.fontStyle),
+                          ],
                         ),
+                        InkWell(
+                            onTap: () {
+                              _showBottomSheet(context);
+                            },
+                            child: const Icon(CupertinoIcons.ellipsis_vertical))
+                      ],
+                    ),
+                  ),
+                  heightBox(10),
+                  Container(
+                    height: 300,
+                    width: MediaQuery.of(context).size.width,
+                    decoration:
+                        const BoxDecoration(color: DesignColors.secondryColor),
+                  ),
+                  heightBox(5),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        children: [
+                          const Icon(
+                            CupertinoIcons.heart_fill,
+                            size: 25,
+                          ),
+                          widthBox(12),
+                          InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) =>
+                                          const CommentScreen()));
+                            },
+                            child: const Icon(
+                              CupertinoIcons.chat_bubble,
+                              size: 25,
+                            ),
+                          ),
+                          widthBox(12),
+                          Transform.rotate(
+                            angle: -((180 * pi) / 720),
+                            child: const Icon(
+                              Icons.send_outlined,
+                              size: 25,
+                              color: DesignColors.primaryColor,
+                            ),
+                          )
+                        ],
                       ),
-                      widthBox(10),
-                      Text("Username", style: DesignColors.fontStyle),
+                      const Icon(
+                        Icons.bookmark_border,
+                        size: 30,
+                      )
                     ],
                   ),
-                  const Icon(CupertinoIcons.ellipsis_vertical)
+                  heightBox(3),
+                  Row(
+                    children: [
+                      Text(
+                        "Username",
+                        style: DesignColors.fontStyle.copyWith(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 15,
+                            letterSpacing: 1),
+                      ),
+                      widthBox(5),
+                      Text(
+                        "Some desciption",
+                        style: DesignColors.fontStyle,
+                      )
+                    ],
+                  ),
+                  heightBox(3),
+                  Text(
+                    "View all 10 comments",
+                    style: DesignColors.fontStyle.copyWith(
+                      color: DesignColors.secondryColor,
+                    ),
+                  ),
+                  Text(
+                    "10/12/2023",
+                    style: DesignColors.fontStyle.copyWith(
+                      color: DesignColors.secondryColor,
+                    ),
+                  ),
                 ],
               ),
-            ),
-            heightBox(10),
-            Container(
-              height: MediaQuery.of(context).size.height * 0.4,
-              width: MediaQuery.of(context).size.width,
-              decoration:
-                  const BoxDecoration(color: DesignColors.secondryColor),
-            ),
-            heightBox(5),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Row(
+            ])));
+  }
+
+  Future<dynamic> _showBottomSheet(BuildContext context) {
+    return showModalBottomSheet(
+        context: context,
+        builder: (BuildContext context) => Container(
+              height: 120,
+              color: DesignColors.darkGreyColor,
+              child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    const Icon(
-                      CupertinoIcons.heart_fill,
-                      size: 30,
+                    InkWell(
+                      child: Container(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            "Delete post",
+                            style: DesignColors.fontStyle.copyWith(
+                                fontWeight: FontWeight.bold, fontSize: 15),
+                          )),
                     ),
-                    widthBox(5),
-                    const Icon(
-                      CupertinoIcons.chat_bubble,
-                      size: 30,
+                    const Divider(
+                      color: DesignColors.secondryColor,
                     ),
-                    widthBox(10),
-                    Transform.rotate(
-                      angle: -((180 * pi) / 720),
-                      child: const Icon(
-                        Icons.send_outlined,
-                        size: 30,
-                        color: DesignColors.primaryColor,
-                      ),
-                    )
-                  ],
-                ),
-                const Icon(
-                  Icons.bookmark_border,
-                  size: 30,
-                )
-              ],
-            ),
-            heightBox(3),
-            Row(
-              children: [
-                Text(
-                  "Username",
-                  style: DesignColors.fontStyle.copyWith(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 15,
-                      letterSpacing: 1),
-                ),
-                widthBox(5),
-                Text(
-                  "Some desciption",
-                  style: DesignColors.fontStyle,
-                )
-              ],
-            ),
-            heightBox(3),
-            Text(
-              "View all 10 comments",
-              style: DesignColors.fontStyle.copyWith(
-                color: DesignColors.secondryColor,
-              ),
-            ),
-            Text(
-              "10/12/2023",
-              style: DesignColors.fontStyle.copyWith(
-                color: DesignColors.secondryColor,
-              ),
-            ),
-          ],
-        )));
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.of(context).pop();
+                        Navigator.pushNamed(context, PageRoutes.editPostScreen);
+                      },
+                      child: Container(
+                          padding: const EdgeInsets.only(left: 10),
+                          child: Text(
+                            "Edit post",
+                            style: DesignColors.fontStyle.copyWith(
+                              fontWeight: FontWeight.w200,
+                            ),
+                          )),
+                    ),
+                  ]),
+            ));
   }
 }

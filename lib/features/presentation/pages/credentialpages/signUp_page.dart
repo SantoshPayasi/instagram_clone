@@ -2,7 +2,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:instagram_clone/features/presentation/pages/credentialpages/signIn_page.dart';
 import '../../../../constInfo.dart';
 import '../../widgets/bottomNavigationSection.dart';
 import '../../widgets/formInputfield.dart';
@@ -106,10 +105,8 @@ class _SignupPageState extends State<SignupPage> {
             BootomNavigationWidget(
               lable: "Already have any account?",
               navigationFunction: () {
-                Navigator.pushAndRemoveUntil(
-                    context,
-                    MaterialPageRoute(builder: (context) => const SigninPage()),
-                    (route) => false);
+                Navigator.pushNamedAndRemoveUntil(
+                    context, PageRoutes.signInScreen, (route) => false);
               },
               navigationTitle: "SignIn Now",
             )
