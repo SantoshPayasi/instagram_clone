@@ -1,4 +1,4 @@
-// ignore_for_file: depend_on_referenced_packages
+// ignore_for_file: depend_on_referenced_packages, deprecated_member_use, file_names
 import 'package:flutter/cupertino.dart';
 import "package:font_awesome_flutter/font_awesome_flutter.dart";
 import 'package:flutter/material.dart';

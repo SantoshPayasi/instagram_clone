@@ -1,6 +1,9 @@
+// ignore_for_file: overridden_fields, annotate_overrides
+
 import '../../../domain/entities/user/user_entity.dart';
 
 class UserModel extends UserEntity {
+ 
   final String? uid;
   final String? username;
   final String? name;
