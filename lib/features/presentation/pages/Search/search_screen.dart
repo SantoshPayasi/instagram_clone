@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constInfo.dart';
-import 'package:instagram_clone/features/presentation/widgets/searchFieldWidget.dart';
+import 'package:instagram_clone/features/presentation/pages/Search/widget/searchFieldWidget.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});
@@ -10,31 +10,29 @@ class SearchScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: DesignColors.backgroundColor,
       body: SafeArea(
-          child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 20),
-          child: Column(
-            children: [
-              SearchFieldWidget(searchController: searchController),
-              heightBox(20),
-              GridView.builder(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3, crossAxisSpacing: 10),
-                itemBuilder: (context, index) {
-                  return Container(
+        child: SingleChildScrollView(
+            physics: const BouncingScrollPhysics(),
+            child: Padding(
+              padding: const EdgeInsets.only(left: 10, right: 10, top: 10),
+              child: Column(children: [
+                SearchFieldWidget(searchController: searchController),
+                heightBox(20),
+                GridView.builder(
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 3,
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10),
+                  itemBuilder: (context, index) => Container(
                       height: 100,
                       width: 100,
-                      decoration: const BoxDecoration(
-                          color: DesignColors.secondryColor));
-                },
-                itemCount: 4,
-                // shrinkWrap: true,
-              )
-            ],
-          ),
-        ),
-      )),
+                      color: DesignColors.secondryColor),
+                  itemCount: 32,
+                  shrinkWrap: true,
+                )
+              ]),
+            )),
+      ),
     );
   }
 }
