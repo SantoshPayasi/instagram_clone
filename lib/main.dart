@@ -7,10 +7,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:instagram_clone/features/presentation/pages/main/main_screen.dart';
 import 'package:instagram_clone/firebase_options.dart';
 import "package:instagram_clone/route_controller.dart";
+import 'injection_container.dart' as di;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await di.init();
   runApp(const MyApp());
 }
 
@@ -20,15 +22,13 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        theme: ThemeData.dark(),
-        debugShowCheckedModeBanner: false,
-        onGenerateRoute: OnGenerateRoute.route,
-        initialRoute: "/",
-        routes:{
-          "/":(context)=>const MainScreen()
-        },
-        // home: const MainScreen()
-        // home: const SigninPage(),
-        );
+      theme: ThemeData.dark(),
+      debugShowCheckedModeBanner: false,
+      onGenerateRoute: OnGenerateRoute.route,
+      initialRoute: "/",
+      routes: {"/": (context) => const MainScreen()},
+      // home: const MainScreen()
+      // home: const SigninPage(),
+    );
   }
 }

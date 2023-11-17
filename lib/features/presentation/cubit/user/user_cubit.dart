@@ -3,9 +3,9 @@ import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:equatable/equatable.dart';
 
-import '../../domain/entities/user/user_entity.dart';
-import '../../domain/usecases/firebase_usecases/user/update_user_usecase.dart';
-import '../../domain/usecases/firebase_usecases/user/ger_all_users_usecase.dart';
+import '../../../domain/entities/user/user_entity.dart';
+import '../../../domain/usecases/firebase_usecases/user/update_user_usecase.dart';
+import '../../../domain/usecases/firebase_usecases/user/ger_all_users_usecase.dart';
 
 part 'user_state.dart';
 
