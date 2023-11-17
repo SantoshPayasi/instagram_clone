@@ -1,13 +1,12 @@
-import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_clone/features/domain/repository/firebase_repository.dart';
 
-class SignOut{
+class SignOutUseCase{
   final FirebaseRepository repository;
 
 
-  SignOut({required this.repository});
+  SignOutUseCase({required this.repository});
 
-  Future<void> call(UserEntity user){
+  Future<void> call(){
     return repository.signOut();
   }
 

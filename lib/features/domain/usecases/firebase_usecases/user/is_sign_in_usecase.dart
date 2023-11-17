@@ -1,4 +1,3 @@
-import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_clone/features/domain/repository/firebase_repository.dart';
 
 class IsSignInUseCase{
@@ -7,7 +6,7 @@ class IsSignInUseCase{
 
   IsSignInUseCase({required this.repository});
 
-  Future<bool> call(UserEntity user){
+  Future<bool> call(){
     return repository.isSignIn();
   }
 
