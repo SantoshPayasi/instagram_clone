@@ -11,6 +11,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:instagram_clone/features/presentation/pages/main/main_screen.dart';
 import 'package:instagram_clone/firebase_options.dart';
 import "package:instagram_clone/route_controller.dart";
+import 'features/presentation/cubit/user/getSIngleUser/cubit/get_single_user_cubit.dart';
 import 'injection_container.dart' as di;
 
 Future<void> main() async {
@@ -29,7 +30,8 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (_)=>di.sl<AuthCubit>()..appStarted(context)),
         BlocProvider(create: (_)=> di.sl<UserCubit>()),
-        BlocProvider(create: (_)=>di.sl<CredentialCubit>())
+        BlocProvider(create: (_)=>di.sl<CredentialCubit>()),
+        BlocProvider(create: (_)=>di.sl<GetSingleUserCubit>())
       ],
       child: MaterialApp(
         theme: ThemeData.dark(),

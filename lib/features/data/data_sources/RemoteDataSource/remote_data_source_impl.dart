@@ -80,8 +80,8 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
     } on FirebaseAuthException catch (e) {
       if (e.code == "user-not-found") {
         toast("User not found");
-      } else if (e.code == "wrong-password") {
-        toast("Wrong password");
+      } else if (e.code == "INVALID_LOGIN_CREDENTIALS") {
+        toast("Wrong email or password");
       }
     }
   }

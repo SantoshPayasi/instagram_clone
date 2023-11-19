@@ -23,7 +23,7 @@ class CredentialCubit extends Cubit<CredentialState> {
       }catch(_){
         emit(CredentialFailure());
       }
-  }
+  } 
   Future<void>signUpUser(UserEntity user) async{
       emit(CredentialLoading());
       try{
