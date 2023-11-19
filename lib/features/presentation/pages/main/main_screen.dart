@@ -6,7 +6,8 @@ import 'package:instagram_clone/features/presentation/pages/Profile/profile_scre
 import 'package:instagram_clone/features/presentation/pages/Search/search_screen.dart';
 
 class MainScreen extends StatefulWidget {
-  const MainScreen({super.key});
+  final String uid;
+  const MainScreen({required this.uid,super.key});
 
   @override
   State<MainScreen> createState() => _MainScreenState();

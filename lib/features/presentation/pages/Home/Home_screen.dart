@@ -6,7 +6,7 @@ import 'package:instagram_clone/constInfo.dart';
 import "package:flutter_svg/flutter_svg.dart";
 import "dart:math";
 import 'package:instagram_clone/features/presentation/pages/Home/comment_screen.dart';
-
+// import 'package:instagram_clone/injection_container.dart' as di;
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

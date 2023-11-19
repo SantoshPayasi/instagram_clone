@@ -1,6 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages, unused_import
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:instagram_clone/features/presentation/cubit/auth/auth_cubit.dart';
+import 'package:instagram_clone/features/presentation/cubit/cridentials/cridential_cubit.dart';
+import 'package:instagram_clone/features/presentation/cubit/user/user_cubit.dart';
 import 'package:instagram_clone/features/presentation/pages/Search/search_screen.dart';
 import 'package:instagram_clone/features/presentation/pages/credentialpages/signIn_page.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -21,14 +25,32 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.dark(),
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: OnGenerateRoute.route,
-      initialRoute: "/",
-      routes: {"/": (context) => const MainScreen()},
-      // home: const MainScreen()
-      // home: const SigninPage(),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (_)=>di.sl<AuthCubit>()..appStarted(context)),
+        BlocProvider(create: (_)=> di.sl<UserCubit>()),
+        BlocProvider(create: (_)=>di.sl<CredentialCubit>())
+      ],
+      child: MaterialApp(
+        theme: ThemeData.dark(),
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: OnGenerateRoute.route,
+        initialRoute: "/",
+        routes: {
+          "/": (context) {
+            return BlocBuilder<AuthCubit, AuthState>(
+              builder: (context, authState) {
+                if (authState is Authenticated) {
+                  return MainScreen(uid: authState.uid);
+                }
+                return const SigninPage();
+              },
+            );
+          }
+        },
+        // home: const MainScreen()
+        // home: const SigninPage(),
+      ),
     );
   }
 }
