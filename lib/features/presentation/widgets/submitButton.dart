@@ -11,7 +11,9 @@ class SubmitButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-        onTap: onTapAction(),
+        onTap: () {
+          onTapAction();
+        },
         child: Container(
           height: 50,
           alignment: Alignment.center,

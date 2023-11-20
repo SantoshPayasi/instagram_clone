@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constInfo.dart';
+import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
+import 'package:instagram_clone/features/presentation/cubit/auth/auth_cubit.dart';
 
+// ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
+ UserEntity? user;
+   ProfileScreen({super.key,  this.user});
 
   @override
   Widget build(BuildContext context) {
@@ -12,7 +17,7 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: DesignColors.backgroundColor,
         titleSpacing: 10,
         title: Text(
-          "Username",
+          "${user?.username}",
           style: DesignColors.fontStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -48,7 +53,7 @@ class ProfileScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "0",
+                            "${user?.posts}",
                             style:
                                 DesignColors.fontStyle.copyWith(fontSize: 20),
                           ),
@@ -67,7 +72,7 @@ class ProfileScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "2",
+                            "${user?.totalFollowers}",
                             style:
                                 DesignColors.fontStyle.copyWith(fontSize: 20),
                           ),
@@ -86,7 +91,7 @@ class ProfileScreen extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
                           Text(
-                            "10",
+                            "${user?.totalFollowing}",
                             style:
                                 DesignColors.fontStyle.copyWith(fontSize: 20),
                           ),
@@ -103,12 +108,12 @@ class ProfileScreen extends StatelessWidget {
           ),
           heightBox(10),
           Text(
-            "Username",
+            "${user?.name == ""?  user?.username : user?.name}",
             style: DesignColors.fontStyle
                 .copyWith(fontWeight: FontWeight.bold, fontSize: 15),
           ),
           Text(
-            "Description",
+            "${user?.bio}",
             style: DesignColors.fontStyle.copyWith(
                 fontWeight: FontWeight.w100, color: DesignColors.secondryColor),
           ),
@@ -180,10 +185,17 @@ class ProfileScreen extends StatelessWidget {
                     InkWell(
                       child: Container(
                           padding: const EdgeInsets.only(left: 10),
-                          child: Text(
-                            "Logout",
-                            style: DesignColors.fontStyle.copyWith(
-                              fontWeight: FontWeight.w200,
+                          child: InkWell(
+                            onTap: () {
+                              BlocProvider.of<AuthCubit>(context).loggedOut();
+                              Navigator.pushNamedAndRemoveUntil(context,
+                                  PageRoutes.signInScreen, (route) => false);
+                            },
+                            child: Text(
+                              "Logout",
+                              style: DesignColors.fontStyle.copyWith(
+                                fontWeight: FontWeight.w200,
+                              ),
                             ),
                           )),
                     ),

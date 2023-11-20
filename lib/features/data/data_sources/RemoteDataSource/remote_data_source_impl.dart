@@ -6,6 +6,7 @@ import 'package:instagram_clone/features/data/models/user/user_model.dart';
 import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import "package:cloud_firestore/cloud_firestore.dart";
 import 'package:firebase_auth/firebase_auth.dart';
+import 'dart:io';
 
 class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
   final FirebaseFirestore firebaseFirestore;
@@ -141,5 +142,11 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
     }
 
     userCollection.doc(user.uid).update(userInformation);
+  }
+
+  @override
+  Future<String> uploadImageToStorage(
+      File? file, bool isPost, String childName) async {
+    return " sp";
   }
 }

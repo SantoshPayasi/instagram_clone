@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors_in_immutables
 
+import 'dart:io';
+
 import 'package:equatable/equatable.dart';
 
 class UserEntity extends Equatable {
@@ -18,6 +20,7 @@ class UserEntity extends Equatable {
 //  Not stored in db
   final String? passwords;
   final String? otherUid;
+  final File? imageFile;
 
   UserEntity(
       {this.name,
@@ -33,23 +36,25 @@ class UserEntity extends Equatable {
       this.totalFollowers,
       this.totalFollowing,
       this.username,
-      this.website
+      this.website,
+      this.imageFile
       });
 
   @override
   List<Object?> get props => [
-    name,
-    uid,
-    email,
-    followers,
-    bio,
-    following,
-    otherUid,
-    passwords,
-    posts,
-    profileUrl,
-    totalFollowers,
-    totalFollowing,
-    username
-  ];
+        name,
+        uid,
+        email,
+        followers,
+        bio,
+        following,
+        otherUid,
+        passwords,
+        posts,
+        profileUrl,
+        totalFollowers,
+        totalFollowing,
+        username,
+        imageFile
+      ];
 }
