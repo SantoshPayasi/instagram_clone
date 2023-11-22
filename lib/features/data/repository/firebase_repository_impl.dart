@@ -43,6 +43,11 @@ class FirebaseRepositoryImpl implements FirebaseRepository {
       remoteDataSource.updateUser(user);
 
   @override
-  Future<String>uploadImageToStorage(
-      File? file, bool isPost, String childName) async =>remoteDataSource.uploadImageToStorage(file, isPost, childName);
+  Future<String> uploadImageToStorage(
+          File? file, bool isPost, String childName) async =>
+      remoteDataSource.uploadImageToStorage(file, isPost, childName);
+
+  @override
+  Future<void> createUserWithProfile(UserEntity user, String imageUrl) async =>
+      remoteDataSource.createUserWithProfile(user, imageUrl);
 }

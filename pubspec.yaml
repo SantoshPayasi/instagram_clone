@@ -31,6 +31,7 @@ dependencies:
   cloud_firestore: ^4.13.1
   cupertino_icons: ^1.0.2
   equatable: ^2.0.5
+  firebase_storage: ^11.5.2
   flutter:
     sdk: flutter
   flutter_bloc: ^8.1.3

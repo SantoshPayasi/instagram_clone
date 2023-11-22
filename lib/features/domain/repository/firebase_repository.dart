@@ -13,6 +13,8 @@ abstract class FirebaseRepository {
   Stream<List<UserEntity>> getSingleUser(String uid);
   Future<String> getCurrentUid();
   Future<void> createUser(UserEntity user);
+  Future<void> createUserWithProfile(UserEntity user, String imageUrl);
   Future<void> updateUser(UserEntity user);
-  Future<String> uploadImageToStorage(File? file, bool isPost, String childName);
+  Future<String> uploadImageToStorage(
+      File? file, bool isPost, String childName);
 }
