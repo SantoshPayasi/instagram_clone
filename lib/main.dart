@@ -1,5 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages, unused_import
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/features/presentation/cubit/auth/auth_cubit.dart';
@@ -28,10 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (_)=>di.sl<AuthCubit>()..appStarted(context)),
-        BlocProvider(create: (_)=> di.sl<UserCubit>()),
-        BlocProvider(create: (_)=>di.sl<CredentialCubit>()),
-        BlocProvider(create: (_)=>di.sl<GetSingleUserCubit>())
+        BlocProvider(create: (_) => di.sl<AuthCubit>()..appStarted(context)),
+        BlocProvider(create: (_) => di.sl<UserCubit>()),
+        BlocProvider(create: (_) => di.sl<CredentialCubit>()),
+        BlocProvider(create: (_) => di.sl<GetSingleUserCubit>())
       ],
       child: MaterialApp(
         theme: ThemeData.dark(),

@@ -4,6 +4,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constInfo.dart';
 import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_clone/features/presentation/cubit/auth/auth_cubit.dart';
+import 'package:instagram_clone/features/presentation/widgets/ProfilePic_widget.dart';
 
 // ignore: must_be_immutable
 class ProfileScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class ProfileScreen extends StatelessWidget {
         backgroundColor: DesignColors.backgroundColor,
         titleSpacing: 10,
         title: Text(
-          "${user?.username}",
+          (user?.username==null || user!.username!.isEmpty)?"New user":"${user?.username}",
           style: DesignColors.fontStyle.copyWith(fontWeight: FontWeight.bold),
         ),
         actions: [
@@ -37,14 +38,8 @@ class ProfileScreen extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const CircleAvatar(
-                    radius: 30,
-                    backgroundColor: DesignColors.primaryColor,
-                    child: Icon(
-                      FontAwesomeIcons.person,
-                      color: DesignColors.secondryColor,
-                      size: 50,
-                    ),
+                  ClipRRect(
+                    child: profilePic(imageUrl: user?.profileUrl),
                   ),
                   Row(
                     children: [

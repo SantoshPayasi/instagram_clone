@@ -1,11 +1,15 @@
-// ignore_for_file: file_names, depend_on_referenced_packages, deprecated_member_use
+// ignore_for_file: file_names, depend_on_referenced_packages, deprecated_member_use, invalid_use_of_visible_for_testing_member
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_clone/features/presentation/cubit/auth/auth_cubit.dart';
 import 'package:instagram_clone/features/presentation/cubit/cridentials/cridential_cubit.dart';
 import 'package:instagram_clone/features/presentation/pages/main/main_screen.dart';
+import 'package:instagram_clone/features/presentation/widgets/ProfilePic_widget.dart';
 import '../../../../constInfo.dart';
 import '../../widgets/bottomNavigationSection.dart';
 import '../../widgets/formInputfield.dart';
@@ -25,6 +29,7 @@ class _SignupPageState extends State<SignupPage> {
   final TextEditingController _bio = TextEditingController();
 
   bool isSigningUp = false;
+  File? file;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -74,24 +79,21 @@ class _SignupPageState extends State<SignupPage> {
               "assets/logo.svg",
               color: DesignColors.primaryColor,
             ),
-            const Stack(
+            Stack(
               children: [
-                CircleAvatar(
-                  backgroundColor: DesignColors.primaryColor,
-                  radius: 30,
-                  child: Icon(
-                    Icons.person_rounded,
-                    color: DesignColors.secondryColor,
-                    size: 30,
-                  ),
-                ),
+                profilePic(file: file, imageUrl: ""),
                 Positioned(
                   bottom: 5,
                   right: 0,
-                  child: Icon(
-                    Icons.add_a_photo_rounded,
-                    color: DesignColors.blueColor,
-                    size: 20,
+                  child: GestureDetector(
+                    onTap: () {
+                      _selectImage();
+                    },
+                    child: const Icon(
+                      Icons.add_a_photo_rounded,
+                      color: DesignColors.blueColor,
+                      size: 20,
+                    ),
                   ),
                 )
               ],
@@ -167,6 +169,7 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void _signUpUser() {
+
     setState(() {
       isSigningUp = true;
     });
@@ -175,7 +178,7 @@ class _SignupPageState extends State<SignupPage> {
         passwords: _password.text,
         username: _username.text,
         bio: _bio.text,
-        name:"",
+        name: "",
         totalFollowers: 0,
         totalFollowing: 0,
         profileUrl: "",
@@ -183,7 +186,9 @@ class _SignupPageState extends State<SignupPage> {
         followers: const [],
         following: const [],
         website: "",
-        otherUid: "");
+        otherUid: "",
+        imageFile: file
+        );
     BlocProvider.of<CredentialCubit>(context)
         .signUpUser(user)
         .then((value) => _clear());
@@ -197,5 +202,20 @@ class _SignupPageState extends State<SignupPage> {
       _bio.clear();
       isSigningUp = false;
     });
+  }
+
+  Future<void> _selectImage() async {
+    try {
+      final imageFile = await ImagePicker.platform.getImageFromSource(source: ImageSource.gallery);
+      if (imageFile != null) {
+        setState(() {
+          file = File(imageFile.path);
+        });
+      } else {
+        toast("No image is selected");
+      }
+    } catch (e) {
+      toast(e.toString());
+    }
   }
 }
