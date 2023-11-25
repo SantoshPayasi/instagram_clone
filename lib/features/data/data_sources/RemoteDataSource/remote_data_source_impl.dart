@@ -24,21 +24,19 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
     final uid = await getCurrentUid();
     userCollection.doc(uid).get().then((userDoc) {
       final newUser = UserModel(
-              uid: uid,
-              name: user.name,
-              email: user.email,
-              profileUrl: user.profileUrl,
-              website: user.website,
-              totalFollowers: user.totalFollowers,
-              totalFollowing: user.totalFollowing,
-              posts: user.posts,
-              bio: user.bio,
-              username: user.username,
-              following: user.following,
-              followers: user.followers,
-              
-              )
-          .toJson();
+        uid: uid,
+        name: user.name,
+        email: user.email,
+        profileUrl: user.profileUrl,
+        website: user.website,
+        totalFollowers: user.totalFollowers,
+        totalFollowing: user.totalFollowing,
+        posts: user.posts,
+        bio: user.bio,
+        username: user.username,
+        following: user.following,
+        followers: user.followers,
+      ).toJson();
 
       if (!userDoc.exists) {
         userCollection.doc(uid).set(newUser);
@@ -49,27 +47,26 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
       toast("Some error is occurred");
     });
   }
+
   @override
   Future<void> createUserWithProfile(UserEntity user, String imageUrl) async {
     final userCollection = firebaseFirestore.collection(FirebaseConst.users);
     final uid = await getCurrentUid();
     userCollection.doc(uid).get().then((userDoc) {
       final newUser = UserModel(
-              uid: uid,
-              name: user.name,
-              email: user.email,
-              profileUrl: imageUrl,
-              website: user.website,
-              totalFollowers: user.totalFollowers,
-              totalFollowing: user.totalFollowing,
-              posts: user.posts,
-              bio: user.bio,
-              username: user.username,
-              following: user.following,
-              followers: user.followers,
-              
-              )
-          .toJson();
+        uid: uid,
+        name: user.name,
+        email: user.email,
+        profileUrl: imageUrl,
+        website: user.website,
+        totalFollowers: user.totalFollowers,
+        totalFollowing: user.totalFollowing,
+        posts: user.posts,
+        bio: user.bio,
+        username: user.username,
+        following: user.following,
+        followers: user.followers,
+      ).toJson();
 
       if (!userDoc.exists) {
         userCollection.doc(uid).set(newUser);
@@ -137,10 +134,8 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
             .then((value) async {
           if (value.user?.uid != null) {
             if (user.imageFile != null) {
-              uploadImageToStorage(user.imageFile, false, value.user!.uid)
-                  .then((profileUrl) => {
-                    createUserWithProfile(user, profileUrl)
-                  });
+              uploadImageToStorage(user.imageFile, false, value.user!.uid).then(
+                  (profileUrl) => {createUserWithProfile(user, profileUrl)});
             }
             await createUserWithProfile(user, "");
           }
@@ -184,16 +179,20 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
       userInformation["posts"] = user.posts;
     }
 
+    if (user.imageFile != null) {
+      uploadImageToStorage(user.imageFile, false, user.uid.toString())
+          .then((value) {
+          userInformation["profileUrl"] = value;
+      });
+    }
+
     userCollection.doc(user.uid).update(userInformation);
   }
 
   @override
   Future<String> uploadImageToStorage(
       File? file, bool isPost, String childName) async {
-    Reference ref = firebaseStorage
-        .ref()
-        .child(childName)
-        .child(firebaseAuth.currentUser!.uid);
+    Reference ref = firebaseStorage.ref("profilePic/").child(childName);
     if (isPost) {
       String id = const Uuid().v1();
       ref = ref.child(id);

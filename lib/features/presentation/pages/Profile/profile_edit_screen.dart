@@ -1,20 +1,48 @@
+// ignore_for_file: unnecessary_null_comparison, invalid_use_of_visible_for_testing_member
+
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constInfo.dart';
+import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_clone/features/presentation/pages/Profile/widget/profile_edit_form_widget.dart';
+import '../../widgets/ProfilePic_widget.dart';
+import 'dart:io';
+import 'package:image_picker/image_picker.dart';
 
-class EditProfileScreen extends StatelessWidget {
-  const EditProfileScreen({super.key});
+class EditProfileScreen extends StatefulWidget {
+  final UserEntity user;
+  const EditProfileScreen({required this.user, super.key});
+
+  @override
+  State<EditProfileScreen> createState() => _EditProfileScreenState();
+}
+
+class _EditProfileScreenState extends State<EditProfileScreen> {
+  late final TextEditingController name;
+  late final TextEditingController userName;
+  late final TextEditingController bio;
+  late final TextEditingController website;
+  late File file;
+
+  @override
+  void initState() {
+    name = TextEditingController(text: widget.user.name);
+    userName = TextEditingController(text: widget.user.username);
+    bio = TextEditingController(text: widget.user.bio);
+    website = TextEditingController(text: widget.user.website);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    name.dispose();
+    userName.dispose();
+    bio.dispose();
+    website.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-    final TextEditingController name =
-        TextEditingController(text: "Santosh kumar payasi");
-    final TextEditingController userName =
-        TextEditingController(text: "Username");
-    final TextEditingController bio =
-        TextEditingController(text: "This is my simple bio");
-    final TextEditingController website =
-        TextEditingController(text: "www.sp.co.in");
     return Scaffold(
       backgroundColor: DesignColors.backgroundColor,
       body: SafeArea(
@@ -46,20 +74,17 @@ class EditProfileScreen extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(vertical: 30),
                 child: Column(
                   children: [
-                    const CircleAvatar(
-                      backgroundColor: DesignColors.primaryColor,
-                      radius: 45,
-                      child: Icon(
-                        Icons.person_2,
-                        color: DesignColors.secondryColor,
-                        size: 50,
-                      ),
-                    ),
+                    profilePic(imageUrl: widget.user.profileUrl, file: file),
                     heightBox(20),
-                    Text(
-                      "Please Upload Image",
-                      style: DesignColors.fontStyle
-                          .copyWith(color: DesignColors.blueColor),
+                    GestureDetector(
+                      onTap: () {
+                        _uploadImage();
+                      },
+                      child: Text(
+                        "Please Upload Image",
+                        style: DesignColors.fontStyle
+                            .copyWith(color: DesignColors.blueColor),
+                      ),
                     ),
                   ],
                 )),
@@ -79,5 +104,21 @@ class EditProfileScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _uploadImage() async {
+    try {
+      final uploadedFile = await ImagePicker.platform
+          .getImageFromSource(source: ImageSource.gallery);
+      if (uploadedFile == null) {
+        toast("No images are uploaded");
+      } else {
+        setState(() {
+          file = File(uploadedFile.path);
+        });
+      }
+    } catch (e) {
+      toast(e.toString());
+    }
   }
 }

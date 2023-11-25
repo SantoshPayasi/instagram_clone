@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:instagram_clone/constInfo.dart';
+import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_clone/features/presentation/pages/Home/comment_screen.dart';
 import 'package:instagram_clone/features/presentation/pages/Home/editPostScreen.dart';
 import 'package:instagram_clone/features/presentation/pages/Profile/profile_edit_screen.dart';
@@ -21,7 +22,13 @@ class OnGenerateRoute {
         }
       case PageRoutes.editProfileScreen:
         {
-          return routeBuilding(EditProfileScreen());
+          if (args is UserEntity) {
+            return routeBuilding(EditProfileScreen(
+              user: args,
+            ));
+          } else {
+            return routeBuilding(NotFoundPage());
+          }
         }
       case PageRoutes.editPostScreen:
         {

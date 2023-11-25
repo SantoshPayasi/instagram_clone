@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:instagram_clone/constInfo.dart';
 import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_clone/features/presentation/cubit/auth/auth_cubit.dart';
@@ -38,9 +37,7 @@ class ProfileScreen extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ClipRRect(
-                    child: profilePic(imageUrl: user?.profileUrl),
-                  ),
+                  profilePic(imageUrl: user?.profileUrl),
                   Row(
                     children: [
                       Column(
@@ -162,7 +159,7 @@ class ProfileScreen extends StatelessWidget {
                       onTap: () {
                         Navigator.of(context).pop();
                         Navigator.pushNamed(
-                            context, PageRoutes.editProfileScreen);
+                            context, PageRoutes.editProfileScreen, arguments: user);
                         // Navigator.pushNamed(context, "xyz");
                       },
                       child: Container(

@@ -81,7 +81,7 @@ class _SignupPageState extends State<SignupPage> {
             ),
             Stack(
               children: [
-                profilePic(file: file, imageUrl: ""),
+                ClipRRect(child: profilePic(file: file, imageUrl: "")),
                 Positioned(
                   bottom: 5,
                   right: 0,
@@ -169,7 +169,6 @@ class _SignupPageState extends State<SignupPage> {
   }
 
   void _signUpUser() {
-
     setState(() {
       isSigningUp = true;
     });
@@ -187,8 +186,7 @@ class _SignupPageState extends State<SignupPage> {
         following: const [],
         website: "",
         otherUid: "",
-        imageFile: file
-        );
+        imageFile: file);
     BlocProvider.of<CredentialCubit>(context)
         .signUpUser(user)
         .then((value) => _clear());
@@ -206,7 +204,8 @@ class _SignupPageState extends State<SignupPage> {
 
   Future<void> _selectImage() async {
     try {
-      final imageFile = await ImagePicker.platform.getImageFromSource(source: ImageSource.gallery);
+      final imageFile = await ImagePicker.platform
+          .getImageFromSource(source: ImageSource.gallery);
       if (imageFile != null) {
         setState(() {
           file = File(imageFile.path);
