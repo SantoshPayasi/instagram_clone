@@ -41,7 +41,7 @@ class FirebaseRemoteDataSourceImpl implements FirebaseRemoteDataSource {
       if (!userDoc.exists) {
         userCollection.doc(uid).set(newUser);
       } else {
-        userCollection.doc(uid).update(newUser);
+        userCollection.doc(uid).update(newUser); //This is a single page ui
       }
     }).catchError((error) {
       toast("Some error is occurred");
