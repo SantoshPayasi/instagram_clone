@@ -38,9 +38,7 @@ class ProfileScreen extends StatelessWidget {
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  ClipRRect(
-                    child: profilePic(imageUrl: user?.profileUrl),
-                  ),
+                  profilePic(imageUrl: user?.profileUrl),
                   Row(
                     children: [
                       Column(

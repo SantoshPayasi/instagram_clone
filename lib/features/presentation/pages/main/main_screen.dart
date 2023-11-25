@@ -7,6 +7,7 @@ import 'package:instagram_clone/features/presentation/cubit/user/getSIngleUser/c
 import 'package:instagram_clone/features/presentation/pages/Home/Home_screen.dart';
 import 'package:instagram_clone/features/presentation/pages/Profile/profile_screen.dart';
 import 'package:instagram_clone/features/presentation/pages/Search/search_screen.dart';
+import 'package:instagram_clone/features/presentation/pages/credentialpages/signIn_page.dart';
 
 class MainScreen extends StatefulWidget {
   final String uid;
@@ -87,7 +88,7 @@ class _MainScreenState extends State<MainScreen> {
             body: PageView(
               controller: pageController,
               onPageChanged: navigatedToNextPage,
-              children:  [
+              children: [
                 const HomeScreen(),
                 const SearchScreen(),
                 const Center(
@@ -96,14 +97,16 @@ class _MainScreenState extends State<MainScreen> {
                 const Center(
                   child: Text("Liked Post page"),
                 ),
-                ProfileScreen(user: user ,)
+                ProfileScreen(
+                  user: user,
+                )
               ],
             ),
           );
+        } else if (getSingleUserstate is SIngleUserFailure) {
+          return const SigninPage();
         } else {
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
+          return const Center(child:  CircularProgressIndicator());
         }
       },
     );
