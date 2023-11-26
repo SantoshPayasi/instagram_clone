@@ -1,9 +1,11 @@
 // ignore_for_file: unnecessary_null_comparison, invalid_use_of_visible_for_testing_member
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/constInfo.dart';
 import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 import 'package:instagram_clone/features/presentation/pages/Profile/widget/profile_edit_form_widget.dart';
+import '../../cubit/user/user_cubit.dart';
 import '../../widgets/ProfilePic_widget.dart';
 import 'dart:io';
 import 'package:image_picker/image_picker.dart';
@@ -22,6 +24,7 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
   late final TextEditingController bio;
   late final TextEditingController website;
   late File file;
+  bool isUpdating = false;
 
   @override
   void initState() {
@@ -61,12 +64,15 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                         Icons.clear_outlined,
                         size: 30,
                       )),
-                  const InkWell(
-                      child: Icon(
-                    Icons.check,
-                    color: DesignColors.blueColor,
-                    size: 30,
-                  ))
+                  InkWell(
+                      onTap: () {
+                        _updateDetails();
+                      },
+                      child: const Icon(
+                        Icons.check,
+                        color: DesignColors.blueColor,
+                        size: 30,
+                      ))
                 ],
               ),
             ),
@@ -98,6 +104,18 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
                 EditProfileForm(controller: bio, lable: "Bio"),
                 heightBox(20),
                 EditProfileForm(controller: website, lable: "Website"),
+                heightBox(30),
+                isUpdating
+                    ? const Row(
+                        children: [
+                          Text("Please wait..."),
+                          CircularProgressIndicator()
+                        ],
+                      )
+                    : const SizedBox(
+                        width: 0,
+                        height: 0,
+                      )
               ],
             ))
           ],
@@ -120,5 +138,39 @@ class _EditProfileScreenState extends State<EditProfileScreen> {
     } catch (e) {
       toast(e.toString());
     }
+  }
+
+  void _updateDetails() {
+    setState(() {
+      isUpdating = true;
+    });
+    final user = UserEntity(
+        uid: widget.user.uid,
+        otherUid: widget.user.otherUid,
+        name: name.text,
+        username: userName.text,
+        bio: bio.text,
+        website: website.text,
+        imageFile: file,
+        profileUrl: widget.user.profileUrl,
+        followers: widget.user.followers,
+        following: widget.user.following,
+        totalFollowers: widget.user.totalFollowers,
+        totalFollowing: widget.user.totalFollowing,
+        posts: widget.user.posts);
+    BlocProvider.of<UserCubit>(context).updateUser(user).then((value) {
+      setState(() {
+        isUpdating = false;
+      });
+      _clear();
+      Navigator.pop(context);
+    });
+  }
+
+  void _clear() {
+    name.clear();
+    userName.clear();
+    bio.clear();
+    website.clear();
   }
 }
