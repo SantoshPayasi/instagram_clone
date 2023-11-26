@@ -19,7 +19,7 @@ class UserModel extends UserEntity {
 
   UserModel(
       {
-        this.uid,
+      this.uid,
       this.username,
       this.name,
       this.bio,

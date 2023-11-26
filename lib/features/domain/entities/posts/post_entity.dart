@@ -14,7 +14,7 @@ class PostEntity extends Equatable {
   final Timestamp? createdAt;
 
   const PostEntity(
-      this.postId,
+      {this.postId,
       this.creatorUid,
       this.username,
       this.description,
@@ -23,7 +23,7 @@ class PostEntity extends Equatable {
       this.totalLikes,
       this.likes,
       this.totalComments,
-      this.createdAt);
+      this.createdAt});
 
   @override
 

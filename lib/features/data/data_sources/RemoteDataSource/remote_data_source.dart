@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:instagram_clone/features/domain/entities/user/user_entity.dart';
 
+import '../../../domain/entities/posts/post_entity.dart';
+
 abstract class FirebaseRemoteDataSource {
   // Credentials
   Future<void> signInUser(UserEntity user);
@@ -15,6 +17,14 @@ abstract class FirebaseRemoteDataSource {
   Future<void> createUser(UserEntity user);
   Future<void> createUserWithProfile(UserEntity user, String imageUrl);
   Future<void> updateUser(UserEntity user);
-  Future<String> uploadImageToStorage(
-      File? file, bool isPost, String childName);
+
+  // Firebase cloud Store implementation
+  Future<String> uploadImageToStorage(File? file, bool isPost, String childName);
+
+  // Posts Features
+  Future<void> createPost(PostEntity post);
+  Stream<List<PostEntity>> readPosts(PostEntity post);
+  Future<void> updatePost(PostEntity post);
+  Future<void> deletePost(PostEntity post);
+  Future<void> likePost(PostEntity post);
 }
