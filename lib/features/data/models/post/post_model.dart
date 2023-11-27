@@ -4,7 +4,6 @@ import 'package:instagram_clone/features/domain/entities/posts/post_entity.dart'
 
 class PostModel extends PostEntity {
   final String? postId;
-
   final String? creatorUid;
   final String? username;
   final String? description;
